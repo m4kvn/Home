@@ -1,0 +1,9 @@
+name: Home
+main: com.nepian.home.Home
+version: 1.0
+author: Nepian
+load: POSTWORLD
+softdepend: [ Core ]
+commands:
+  home:
+    usage: /<command>
