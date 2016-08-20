@@ -8,4 +8,4 @@ Core : [https://github.com/MasahiroSaito/Core](https://github.com/MasahiroSaito/
 
 | Home version | Core version |
 | :----------: | :----------: |
-| [1.0](/raw/master/mvn-repo/com/nepian/spigot/home/1.0/home-1.0.jar)  | 1.4  |
+| [1.0](./raw/master/mvn-repo/com/nepian/spigot/home/1.0/home-1.0.jar)  | 1.4  |
