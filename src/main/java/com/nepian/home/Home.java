@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.nepian.core.Messenger;
 import com.nepian.home.command.HomeCommand;
+import com.nepian.home.listener.PlayerRespawnListener;
 
 public class Home extends JavaPlugin {
 	private static final String CORE_VERSION = "1.0";
@@ -17,6 +18,12 @@ public class Home extends JavaPlugin {
 		if (!isLoadedCore()) return;
 		HomeManager.load(this);
 		HomeCommand.load(this);
+		PlayerRespawnListener.load(this);
+	}
+	
+	@Override
+	public void onDisable() {
+		HomeManager.close();
 	}
 	
 	private final boolean isLoadedCore() {

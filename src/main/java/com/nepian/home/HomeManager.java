@@ -27,6 +27,12 @@ public class HomeManager {
 		
 		read();
 	}
+	
+	public static void close() {
+		if (sqlite != null) {
+			sqlite.close();
+		}
+	}
 
 	/**
 	 * プレイヤーのホームを設定する
@@ -42,6 +48,7 @@ public class HomeManager {
 		if (hasHome(player)) {
 			ps = sqlite.getPreparedStatement(SQLiteTokens.UPDATE);
 			ps.setBytes(1, bytes);
+			ps.setString(2, uuid.toString());
 		} else {
 			ps = sqlite.getPreparedStatement(SQLiteTokens.ADD);
 			ps.setString(1, uuid.toString());
