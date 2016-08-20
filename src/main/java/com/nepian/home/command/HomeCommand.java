@@ -23,8 +23,8 @@ public class HomeCommand extends MainCommand {
 	}
 	
 	public static void load(JavaPlugin plugin) {
-		HomeCommand com = new HomeCommand(plugin);
-		CommandUtil.registerCommand(plugin, COMMAND_NAME, com);
+		HomeCommand command = new HomeCommand(plugin);
+		CommandUtil.registerCommand(plugin, COMMAND_NAME, command);
 	}
 
 	@Override

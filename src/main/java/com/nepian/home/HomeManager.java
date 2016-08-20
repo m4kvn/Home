@@ -25,7 +25,7 @@ public class HomeManager {
 		homes = Util.newMap();
 		plugin = javaPlugin;
 		sqlite = new SQLite(plugin, "homes.db");
-		SQLiteUtil.executeUpdate(sqlite, SQLiteTokens.CREATE);
+		
 		read();
 	}
 
@@ -65,6 +65,7 @@ public class HomeManager {
 	 * SQLiteからホームを読み込む
 	 */
 	private static void read() {
+		SQLiteUtil.executeUpdate(sqlite, SQLiteTokens.CREATE);
 		try {
 			PreparedStatement ps = sqlite.getPreparedStatement(SQLiteTokens.SELECT_ALL);
 			ResultSet rs = ps.executeQuery();
