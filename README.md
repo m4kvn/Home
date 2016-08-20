@@ -1,8 +1,11 @@
 ## 前提条件
 
 Home を動かすためには、前提として Core が必要なります。
+
 Core : [https://github.com/MasahiroSaito/Core](https://github.com/MasahiroSaito/Core)
 
-| Home | Core |
-| :--: | :--: |
-| 1.0  | 1.4  |
+## ダウンロード
+
+| Home version | Core version |
+| :----------: | :----------: |
+| [1.0](/raw/master/mvn-repo/com/nepian/spigot/home/1.0/home-1.0.jar)  | 1.4  |
