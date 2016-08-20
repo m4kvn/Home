@@ -8,13 +8,13 @@ import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.nepian.core.utils.LocationUtil;
 import com.nepian.core.utils.Util;
 import com.nepian.core.utils.sqlite.SQLite;
-import com.nepian.home.utils.SQLiteUtil;
-import com.nepian.home.utils.location.LocationUtil;
 
 public class HomeManager {
 	private static Map<UUID, Location> homes;
@@ -37,7 +37,7 @@ public class HomeManager {
 	public static void setHome(Player player) throws SQLException {
 		UUID uuid = player.getUniqueId();
 		Location location = player.getLocation();
-		byte[] bytes = LocationUtil.getByteObject(location);
+		byte[] bytes = LocationUtil.asByteArray(location);
 		PreparedStatement ps = null;
 		
 		if (hasHome(player)) {
@@ -65,13 +65,15 @@ public class HomeManager {
 	 * SQLiteからホームを読み込む
 	 */
 	private static void read() {
-		SQLiteUtil.executeUpdate(sqlite, SQLiteTokens.CREATE);
+		sqlite.executeUpdate(SQLiteTokens.CREATE);
 		try {
 			PreparedStatement ps = sqlite.getPreparedStatement(SQLiteTokens.SELECT_ALL);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				UUID uuid = UUID.fromString(rs.getString(1));
-				Location location = LocationUtil.createLocation(rs.getBytes(2), plugin);
+				byte[] bytes = rs.getBytes(2);
+				Server server = plugin.getServer();
+				Location location = LocationUtil.fromByteArray(bytes, server);
 				homes.put(uuid, location);
 			}
 		} catch (SQLException e) {
