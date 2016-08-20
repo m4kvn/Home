@@ -8,7 +8,7 @@ Core : [https://github.com/MasahiroSaito/Core](https://github.com/MasahiroSaito/
 
 | Home Version | Core Version | Spigot Version |
 | :----------: | :----------: | :------------: |
-| [1.0](https://github.com/MasahiroSaito/Home/raw/master/mvn-repo/com/nepian/spigot/home/1.0/home-1.0.jar)  | 1.4  | 1.10.~ |
+| [1.0](https://github.com/MasahiroSaito/Home/raw/master/mvn-repo/com/nepian/spigot/home/1.0/home-1.0.jar)  | 1.0  | 1.10.~ |
 
 ## 使い方
 
