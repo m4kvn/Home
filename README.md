@@ -10,9 +10,11 @@ Core : [https://github.com/MasahiroSaito/Core](https://github.com/MasahiroSaito/
 | :----------: | :----------: | :------------: |
 | [1.0](https://github.com/MasahiroSaito/Home/raw/master/mvn-repo/com/nepian/spigot/home/1.0/home-1.0.jar)  | 1.0  | 1.10.~ |
 
-## 使い方
+## 機能
 
-以下をコマンドで利用できる
+- 自分だけがワープできる場所を一箇所だけ設定できる
+- リスポーン時に設定した場所でスポーンする
+- 以下のコマンドが利用できる
 
 | コマンド   | 詳細               |
 | :--------- | :----------------- |
