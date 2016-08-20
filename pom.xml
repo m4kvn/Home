@@ -12,7 +12,7 @@
     </repository>
     <repository>
       <id>core-repo</id>
-      <url>https://github.com/MasahiroSaito/Core/raw/master/target/mvn-repo</url>
+      <url>https://github.com/MasahiroSaito/Core/raw/master/mvn-repo</url>
     </repository>
   </repositories>
 
@@ -26,12 +26,12 @@
     <dependency>
       <groupId>com.Nepian.Spigot</groupId>
       <artifactId>Core</artifactId>
-      <version>1.4</version>
+      <version>1.0</version>
     </dependency>
   </dependencies>
 
   <build>
-    <finalName>${artifactId}-${version}</finalName>
+    <finalName>${artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

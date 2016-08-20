@@ -11,6 +11,7 @@ import com.nepian.core.utils.CommandUtil;
 import com.nepian.core.utils.command.CommandSenderType;
 import com.nepian.core.utils.command.MainCommand;
 import com.nepian.home.HomeManager;
+import com.nepian.home.command.sub.RemoveCommand;
 import com.nepian.home.command.sub.SetCommand;
 
 public class HomeCommand extends MainCommand {
@@ -20,11 +21,12 @@ public class HomeCommand extends MainCommand {
 		super(plugin, COMMAND_NAME);
 		this.setSenderType(CommandSenderType.PLAYER);
 		this.setSubCommand(new SetCommand(this.messenger));
+		this.setSubCommand(new RemoveCommand(this.messenger));
 	}
 	
 	public static void load(JavaPlugin plugin) {
-		HomeCommand com = new HomeCommand(plugin);
-		CommandUtil.registerCommand(plugin, COMMAND_NAME, com);
+		HomeCommand command = new HomeCommand(plugin);
+		CommandUtil.registerCommand(plugin, COMMAND_NAME, command);
 	}
 
 	@Override
