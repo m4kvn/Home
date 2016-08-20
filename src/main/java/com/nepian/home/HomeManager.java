@@ -34,18 +34,13 @@ public class HomeManager {
 		}
 	}
 
-	/**
-	 * プレイヤーのホームを設定する
-	 * @param player 対象のプレイヤー
-	 * @throws SQLException ホーム設定の失敗
-	 */
 	public static void setHome(Player player) throws SQLException {
 		UUID uuid = player.getUniqueId();
 		Location location = player.getLocation();
 		byte[] bytes = LocationUtil.asByteArray(location);
 		PreparedStatement ps = null;
 		
-		if (hasHome(player)) {
+		if (hasHome(uuid)) {
 			ps = sqlite.getPreparedStatement(SQLiteTokens.UPDATE);
 			ps.setBytes(1, bytes);
 			ps.setString(2, uuid.toString());
@@ -55,16 +50,28 @@ public class HomeManager {
 			ps.setBytes(2, bytes);
 		}
 		ps.executeUpdate();
+		
 		homes.put(uuid, location);
 	}
 	
-	/**
-	 * ホームに設定しているLocationインスタンスを取得する
-	 * @param player 対象のプレイヤー
-	 * @return ホームが設定されていない場合nullを返す
-	 */
 	public static Location getHome(OfflinePlayer player) {
 		return homes.get(player.getUniqueId());
+	}
+	
+	public static boolean removeHome(OfflinePlayer player) throws SQLException {
+		UUID uuid = player.getUniqueId();
+		
+		if (hasHome(uuid)) {
+			PreparedStatement ps = sqlite.getPreparedStatement(SQLiteTokens.REMOVE);
+			
+			ps.setString(1, uuid.toString());
+			ps.executeUpdate();
+			homes.remove(uuid);
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 	private static void read() {
@@ -83,15 +90,7 @@ public class HomeManager {
 		}
 	}
 
-	private static boolean hasHome(OfflinePlayer player) {
-		try {
-			PreparedStatement ps = sqlite.getPreparedStatement(SQLiteTokens.SELECT_UUID);
-			ps.setString(1, player.getUniqueId().toString());
-			ResultSet results = ps.executeQuery();
-			if (results.next()) return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
+	private static boolean hasHome(UUID uuid) {
+		return homes.containsKey(uuid);
 	}
 }
