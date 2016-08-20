@@ -8,7 +8,6 @@ import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,7 +21,7 @@ public class HomeManager {
 	private static JavaPlugin plugin;
 
 	public static void load(JavaPlugin javaPlugin) {
-		homes = Util.newMap();
+		homes = Util.newHashMap();
 		plugin = javaPlugin;
 		sqlite = new SQLite(plugin, "homes.db");
 		
@@ -61,9 +60,6 @@ public class HomeManager {
 		return homes.get(player.getUniqueId());
 	}
 
-	/**
-	 * SQLiteからホームを読み込む
-	 */
 	private static void read() {
 		sqlite.executeUpdate(SQLiteTokens.CREATE);
 		try {
@@ -72,8 +68,7 @@ public class HomeManager {
 			while (rs.next()) {
 				UUID uuid = UUID.fromString(rs.getString(1));
 				byte[] bytes = rs.getBytes(2);
-				Server server = plugin.getServer();
-				Location location = LocationUtil.fromByteArray(bytes, server);
+				Location location = LocationUtil.fromByteArray(bytes);
 				homes.put(uuid, location);
 			}
 		} catch (SQLException e) {
@@ -81,11 +76,6 @@ public class HomeManager {
 		}
 	}
 
-	/**
-	 * プレイヤーがホームを設定しているか調べる
-	 * @param player 対象のプレイヤー
-	 * @return ホームを設定していない場合はfalseを返す
-	 */
 	private static boolean hasHome(OfflinePlayer player) {
 		try {
 			PreparedStatement ps = sqlite.getPreparedStatement(SQLiteTokens.SELECT_UUID);
