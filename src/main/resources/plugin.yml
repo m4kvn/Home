@@ -6,4 +6,4 @@ load: POSTWORLD
 softdepend: [ Core ]
 commands:
   home:
-    usage: /<command>
+    usage: /<command> (set/remove/<player-name>)
