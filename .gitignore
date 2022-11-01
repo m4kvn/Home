@@ -3,3 +3,9 @@
 .settings
 .project
 /target/
+
+.idea/
+.gradle/
+*.log
+
+local.properties
